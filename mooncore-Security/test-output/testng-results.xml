@@ -1,55 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="3" passed="3">
+<testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Login Security Suite" duration-ms="5089" started-at="2017-10-18T07:15:03Z" finished-at="2017-10-18T07:15:09Z">
+  <suite name="Login Security Suite" duration-ms="10346" started-at="2017-10-19T16:03:13Z" finished-at="2017-10-19T16:03:23Z">
     <groups>
     </groups>
-    <test name="Login Security Testing" duration-ms="5089" started-at="2017-10-18T07:15:03Z" finished-at="2017-10-18T07:15:09Z">
+    <test name="Login Security Testing" duration-ms="10346" started-at="2017-10-19T16:03:13Z" finished-at="2017-10-19T16:03:23Z">
       <class name="com.philips.request.RequestClass">
-        <test-method status="PASS" signature="configure()[pri:0, instance:com.philips.request.RequestClass@6a28ffa4]" name="configure" is-config="true" duration-ms="1003" started-at="2017-10-18T12:45:03Z" finished-at="2017-10-18T12:45:04Z">
+        <test-method status="PASS" signature="configure()[pri:0, instance:com.philips.request.RequestClass@c267ef4]" name="configure" is-config="true" duration-ms="647" started-at="2017-10-19T21:33:13Z" finished-at="2017-10-19T21:33:13Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- configure -->
-        <test-method status="PASS" signature="loginHHGW(java.util.Hashtable)[pri:1, instance:com.philips.request.RequestClass@6a28ffa4]" name="loginHHGW" duration-ms="2973" started-at="2017-10-18T12:45:05Z" data-provider="getLoginDetails" finished-at="2017-10-18T12:45:07Z">
+        <test-method status="PASS" signature="login(java.util.Hashtable)[pri:1, instance:com.philips.request.RequestClass@c267ef4]" name="login" duration-ms="6345" started-at="2017-10-19T21:33:13Z" data-provider="getLoginDetails" finished-at="2017-10-19T21:33:20Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[{password=Philips@1, methodType=POST, Headers={
+                <![CDATA[{password=Philips@1, AttackType=FUZZFULL,SQL,XSS,HTTPVERB, methodType=POST, Payload={
+    "currentPassword": "current",
+    "newPassword":  "new"
+}, Headers={
 "content-type":"application/json"
-}, Url=https://hhgw-%s.cloud.pcftest.com/api/auth, username=shabana1@mailinator.com}]]>
+}, AttackParameter=auth,userid,newPassword,currentPassword, Url=https://ghgw-%s.cloud.pcftest.com/api/auth, username=shabana3@mailinator.com}]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginHHGW -->
-        <test-method status="PASS" signature="loginHHGW(java.util.Hashtable)[pri:1, instance:com.philips.request.RequestClass@6a28ffa4]" name="loginHHGW" duration-ms="746" started-at="2017-10-18T12:45:07Z" data-provider="getLoginDetails" finished-at="2017-10-18T12:45:08Z">
+        </test-method> <!-- login -->
+        <test-method status="PASS" signature="getProfile(java.util.Hashtable)[pri:2, instance:com.philips.request.RequestClass@c267ef4]" name="getProfile" duration-ms="3306" started-at="2017-10-19T21:33:20Z" data-provider="getprofileDetails" finished-at="2017-10-19T21:33:23Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[{password=!=, methodType=POST, Headers={
+                <![CDATA[{password=Philips@1, AttackType=HTTPVERB, methodType=GET, Headers={
 "content-type":"application/json"
-}, Url=https://hhgw-%s.cloud.pcftest.com/api/auth, username=shabana1@mailinator.com}]]>
+}, AttackParameter=methodType, Url=https://ghgw-%s.cloud.pcftest.com/api/users/%s, username=shabana1@mailinator.com}]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginHHGW -->
-        <test-method status="PASS" signature="loginHHGW(java.util.Hashtable)[pri:1, instance:com.philips.request.RequestClass@6a28ffa4]" name="loginHHGW" duration-ms="308" started-at="2017-10-18T12:45:08Z" data-provider="getLoginDetails" finished-at="2017-10-18T12:45:09Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[{password=Philips@1, methodType=GET, Headers={
-"content-type":"application/json"
-}, Url=https://hhgw-%s.cloud.pcftest.com/api/auth, username=shabana1@mailinator.com}]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- loginHHGW -->
+        </test-method> <!-- getProfile -->
       </class> <!-- com.philips.request.RequestClass -->
     </test> <!-- Login Security Testing -->
   </suite> <!-- Login Security Suite -->

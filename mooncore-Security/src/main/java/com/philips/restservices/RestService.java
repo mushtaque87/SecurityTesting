@@ -69,7 +69,7 @@ public class RestService {
     }
     
     
-    private ResponseObject doRequest(HttpRequestBase request) throws IOException {
+    public ResponseObject doRequest(HttpRequestBase request) throws IOException {
         StackTraceElement[] stackTraceElement = Thread.currentThread().getStackTrace();
         String strClassName = stackTraceElement[3].getClassName();
         String strMethodName = stackTraceElement[3].getMethodName();
@@ -155,7 +155,7 @@ public class RestService {
     		 HttpGet getrequest = new HttpGet(URL);
     		 headers.entrySet().forEach(e -> getrequest.setHeader(e.getKey(), e.getValue()));
 
-    	        return doRequest(getrequest);
+    	      return doRequest(getrequest);
 			
     	case "POST":
     		 HttpPost postrequest = new HttpPost(URL);
@@ -184,6 +184,51 @@ public class RestService {
 	        headers.entrySet().forEach(e -> deleterequest.setHeader(e.getKey(), e.getValue()));
 
 	        return doRequest(deleterequest);
+		}
+    	return null;
+    }
+    
+    public HttpRequestBase generateRequest(String URL, HashMap<String, String> headers, String payload, String methodType) throws IOException
+    {
+    	
+    	switch (methodType) {
+    	case "GET":
+    		 HttpGet getrequest = new HttpGet(URL);
+    		 headers.entrySet().forEach(e -> getrequest.setHeader(e.getKey(), e.getValue()));
+    		 return getrequest;
+    	     // return doRequest(getrequest);
+			
+    	case "POST":
+    		 HttpPost postrequest = new HttpPost(URL);
+    		 postrequest.setEntity(EntityBuilder.create().setText(payload).build());
+    	        headers.entrySet().forEach(e -> postrequest.setHeader(e.getKey(), e.getValue()));
+       		 return postrequest;
+
+    	      //  return doRequest(postrequest);
+    		
+    	case "PUT":
+    		HttpPut putrequest = new HttpPut(URL);
+    		putrequest.setEntity(EntityBuilder.create().setText(payload).build());
+            headers.entrySet().forEach(e -> putrequest.setHeader(e.getKey(), e.getValue()));
+            return putrequest;
+
+            // return doRequest(putrequest);
+    		
+	
+		case "PATCH":
+			HttpPatch patchrequest = new HttpPatch(URL);
+			patchrequest.setEntity(EntityBuilder.create().setText(payload).build());
+	        headers.entrySet().forEach(e -> patchrequest.setHeader(e.getKey(), e.getValue()));
+	        return patchrequest;
+
+	       // return doRequest(patchrequest);
+			
+		case "DELETE":
+			HttpDelete deleterequest = new HttpDelete(URL);
+	        headers.entrySet().forEach(e -> deleterequest.setHeader(e.getKey(), e.getValue()));
+	        return deleterequest;
+
+	        // return doRequest(deleterequest);
 		}
     	return null;
     }

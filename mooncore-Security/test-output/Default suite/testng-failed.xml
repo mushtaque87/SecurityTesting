@@ -5,7 +5,7 @@
     <classes>
       <class name="com.philips.request.RequestClass">
         <methods>
-          <include name="loginHHGW" invocation-numbers="0"/>
+          <include name="getProfile" invocation-numbers="0 1 2"/>
           <include name="configure"/>
         </methods>
       </class> <!-- com.philips.request.RequestClass -->

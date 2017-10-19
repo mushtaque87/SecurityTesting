@@ -2,9 +2,16 @@
 <suite name="Login Security Suite" verbose="1">
 	<parameter name="XlsFile" value="ActiveMinutes_data_sheet_3A_3N" />
 	<parameter name="Space" value="mars" />
-	<test name="Login Security Testing">
+	<test name="Login Security Testing"  preserve-order="true">
 		<classes>
 			<class name="com.philips.request.RequestClass" />
+			<methods>
+			<include name="login" />
+			<exclude name="test" />
+			
+        	<include name="getProfile" />
+        	<exclude name="logout" />
+      </methods>
 		</classes>
 	</test>
 </suite>

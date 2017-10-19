@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Login Security Testing</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>3/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>2/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Wed Oct 18 12:45:03 IST 2017</td>
+<td>Started on:</td><td>Thu Oct 19 21:33:13 IST 2017</td>
 </tr>
-<tr><td>Total time:</td><td>5 seconds (5089 ms)</td>
+<tr><td>Total time:</td><td>10 seconds (10346 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,26 +75,22 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='com.philips.request.RequestClass.loginHHGW()'><b>loginHHGW</b><br>Test class: com.philips.request.RequestClass<br>Parameters: {password=Philips@1, methodType=POST, Headers={
+<td title='com.philips.request.RequestClass.getProfile()'><b>getProfile</b><br>Test class: com.philips.request.RequestClass<br>Parameters: {password=Philips@1, AttackType=HTTPVERB, methodType=GET, Headers={
 "content-type":"application/json"
-}, Url=https://hhgw-%s.cloud.pcftest.com/api/auth, username=shabana1@mailinator.com}</td>
+}, AttackParameter=methodType, Url=https://ghgw-%s.cloud.pcftest.com/api/users/%s, username=shabana1@mailinator.com}</td>
 <td></td>
-<td>2</td>
-<td>com.philips.request.RequestClass@6a28ffa4</td></tr>
+<td>3</td>
+<td>com.philips.request.RequestClass@c267ef4</td></tr>
 <tr>
-<td title='com.philips.request.RequestClass.loginHHGW()'><b>loginHHGW</b><br>Test class: com.philips.request.RequestClass<br>Parameters: {password=!=, methodType=POST, Headers={
+<td title='com.philips.request.RequestClass.login()'><b>login</b><br>Test class: com.philips.request.RequestClass<br>Parameters: {password=Philips@1, AttackType=FUZZFULL,SQL,XSS,HTTPVERB, methodType=POST, Payload={
+    "currentPassword": "current",
+    "newPassword":  "new"
+}, Headers={
 "content-type":"application/json"
-}, Url=https://hhgw-%s.cloud.pcftest.com/api/auth, username=shabana1@mailinator.com}</td>
+}, AttackParameter=auth,userid,newPassword,currentPassword, Url=https://ghgw-%s.cloud.pcftest.com/api/auth, username=shabana3@mailinator.com}</td>
 <td></td>
-<td>0</td>
-<td>com.philips.request.RequestClass@6a28ffa4</td></tr>
-<tr>
-<td title='com.philips.request.RequestClass.loginHHGW()'><b>loginHHGW</b><br>Test class: com.philips.request.RequestClass<br>Parameters: {password=Philips@1, methodType=GET, Headers={
-"content-type":"application/json"
-}, Url=https://hhgw-%s.cloud.pcftest.com/api/auth, username=shabana1@mailinator.com}</td>
-<td></td>
-<td>0</td>
-<td>com.philips.request.RequestClass@6a28ffa4</td></tr>
+<td>6</td>
+<td>com.philips.request.RequestClass@c267ef4</td></tr>
 </table><p>
 </body>
 </html>
