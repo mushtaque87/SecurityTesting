@@ -102,9 +102,11 @@
                     <div class="method-list-content passed suite-Login_Security_Suite">
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Login_Security_Suite" title="com.philips.request.RequestClass" hash-for-method="getProfile({password=Philips@1, AttackType=HTTPVERB, methodType=GET, Headers={
-&quot;content-type&quot;:&quot;application/json...)">getProfile({password=Philips@1, AttackType=HTTPVERB, methodType=GET, Headers={
-"content-type":"application/json...)</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Login_Security_Suite" title="com.philips.request.RequestClass" hash-for-method="getProfile({AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
+&quot;content-type&quot;:&quot;application/json&quot;
+}, Attack...)">getProfile({AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
+"content-type":"application/json"
+}, Attack...)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -134,14 +136,16 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="getProfile({password=Philips@1, AttackType=HTTPVERB, methodType=GET, Headers={
-&quot;content-type&quot;:&quot;application/json...)">
-                  </a> <!-- getProfile({password=Philips@1, AttackType=HTTPVERB, methodType=GET, Headers={
-"content-type":"application/json...) -->
-                  <span class="method-name">getProfile</span>
-                  <span class="parameters">({password=Philips@1, AttackType=HTTPVERB, methodType=GET, Headers={
+                  <a name="getProfile({AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
+&quot;content-type&quot;:&quot;application/json&quot;
+}, Attack...)">
+                  </a> <!-- getProfile({AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
 "content-type":"application/json"
-}, AttackParameter=methodType, Url=https://ghgw-%s.cloud.pcftest.com/api/users/%s, username=shabana1@mailinator.com})</span>
+}, Attack...) -->
+                  <span class="method-name">getProfile</span>
+                  <span class="parameters">({AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
+"content-type":"application/json"
+}, AttackParameter=auth,methodType, Url=https://ghgw-%s.cloud.pcftest.com/api/users/%s})</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
@@ -226,16 +230,16 @@ data.addRows(2);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'login')
 data.setCell(0, 2, 'com.philips.request.RequestClass')
-data.setCell(0, 3, 6345);
+data.setCell(0, 3, 5082);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'getProfile')
 data.setCell(1, 2, 'com.philips.request.RequestClass')
-data.setCell(1, 3, 3306);
+data.setCell(1, 3, 2);
 window.suiteTableData['Login_Security_Suite']= { tableData: data, tableDiv: 'times-div-Login_Security_Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 9 seconds</span>
+              <span class="suite-total-time">Total running time: 5 seconds</span>
               <div id="times-div-Login_Security_Suite">
               </div> <!-- times-div-Login_Security_Suite -->
             </div> <!-- times-div -->
@@ -276,12 +280,13 @@ return data;
               <div class="test-method">
                 <span class="method-name">login({password=Philips@1, AttackType=FUZZFULL,SQL,XSS,HTTPVERB, methodType=POST, Payload={
     "currentPa...)</span>
-                <span class="method-start">668 ms</span>
+                <span class="method-start">647 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">getProfile({password=Philips@1, AttackType=HTTPVERB, methodType=GET, Headers={
-"content-type":"application/json...)</span>
-                <span class="method-start">7030 ms</span>
+                <span class="method-name">getProfile({AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
+"content-type":"application/json"
+}, Attack...)</span>
+                <span class="method-start">5734 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

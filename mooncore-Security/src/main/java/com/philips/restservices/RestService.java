@@ -1,17 +1,22 @@
 package com.philips.restservices;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-
+import org.apache.http.Header;
+import org.apache.http.HeaderIterator;
 import org.apache.http.HttpHost;
+import org.apache.http.ProtocolVersion;
+import org.apache.http.RequestLine;
 import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.HttpPatch;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -25,6 +30,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
+import org.apache.http.params.HttpParams;
 
 
 
@@ -227,10 +233,21 @@ public class RestService {
 			HttpDelete deleterequest = new HttpDelete(URL);
 	        headers.entrySet().forEach(e -> deleterequest.setHeader(e.getKey(), e.getValue()));
 	        return deleterequest;
-
+	        
+	    default:
+	    HttpRequestBase request = new HttpRequestBase() {
+	    	
+			@Override
+			public String getMethod() {
+				// TODO Auto-generated method stub
+				return methodType;
+			}
+		};
+		 request.setURI(URI.create(URL));
+   		 headers.entrySet().forEach(e -> request.setHeader(e.getKey(), e.getValue()));
+		 return request;
 	        // return doRequest(deleterequest);
 		}
-    	return null;
     }
     
 }

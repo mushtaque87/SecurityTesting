@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="Login Security Suite" duration-ms="10346" started-at="2017-10-19T16:03:13Z" finished-at="2017-10-19T16:03:23Z">
+  <suite name="Login Security Suite" duration-ms="76630" started-at="2017-10-20T06:53:01Z" finished-at="2017-10-20T06:54:18Z">
     <groups>
     </groups>
-    <test name="Login Security Testing" duration-ms="10346" started-at="2017-10-19T16:03:13Z" finished-at="2017-10-19T16:03:23Z">
+    <test name="Login Security Testing" duration-ms="76630" started-at="2017-10-20T06:53:01Z" finished-at="2017-10-20T06:54:18Z">
       <class name="com.philips.request.RequestClass">
-        <test-method status="PASS" signature="configure()[pri:0, instance:com.philips.request.RequestClass@c267ef4]" name="configure" is-config="true" duration-ms="647" started-at="2017-10-19T21:33:13Z" finished-at="2017-10-19T21:33:13Z">
+        <test-method status="PASS" signature="configure()[pri:0, instance:com.philips.request.RequestClass@c267ef4]" name="configure" is-config="true" duration-ms="646" started-at="2017-10-20T12:23:01Z" finished-at="2017-10-20T12:23:02Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- configure -->
-        <test-method status="PASS" signature="login(java.util.Hashtable)[pri:1, instance:com.philips.request.RequestClass@c267ef4]" name="login" duration-ms="6345" started-at="2017-10-19T21:33:13Z" data-provider="getLoginDetails" finished-at="2017-10-19T21:33:20Z">
+        <test-method status="PASS" signature="login(java.util.Hashtable)[pri:1, instance:com.philips.request.RequestClass@c267ef4]" name="login" duration-ms="7767" started-at="2017-10-20T12:23:02Z" data-provider="getLoginDetails" finished-at="2017-10-20T12:23:10Z">
           <params>
             <param index="0">
               <value>
@@ -27,13 +27,13 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- login -->
-        <test-method status="PASS" signature="getProfile(java.util.Hashtable)[pri:2, instance:com.philips.request.RequestClass@c267ef4]" name="getProfile" duration-ms="3306" started-at="2017-10-19T21:33:20Z" data-provider="getprofileDetails" finished-at="2017-10-19T21:33:23Z">
+        <test-method status="PASS" signature="getProfile(java.util.Hashtable)[pri:2, instance:com.philips.request.RequestClass@c267ef4]" name="getProfile" duration-ms="68143" started-at="2017-10-20T12:23:10Z" data-provider="getprofileDetails" finished-at="2017-10-20T12:24:18Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[{password=Philips@1, AttackType=HTTPVERB, methodType=GET, Headers={
+                <![CDATA[{AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
 "content-type":"application/json"
-}, AttackParameter=methodType, Url=https://ghgw-%s.cloud.pcftest.com/api/users/%s, username=shabana1@mailinator.com}]]>
+}, AttackParameter=auth,methodType, Url=https://ghgw-%s.cloud.pcftest.com/api/users/%s}]]>
               </value>
             </param>
           </params>

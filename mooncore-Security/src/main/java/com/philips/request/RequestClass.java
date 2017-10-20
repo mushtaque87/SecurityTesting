@@ -1,5 +1,6 @@
 package com.philips.request;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -36,7 +38,8 @@ public class RequestClass {
 	
 	private ArrayList<String> fuzzingfull;
 	private ArrayList<String> HTTPVerb;
-	
+	private ArrayList<String> SQLInjection;
+	private ArrayList<String> XSS;
 	private static RequestClass requestShared = new RequestClass( );
 
 	   /* A private Constructor prevents any other
@@ -50,23 +53,26 @@ public class RequestClass {
 	   }
 	   
 	   @BeforeClass()
-		public void configure() {
+		public void configure() throws IOException {
 			//summaryLogger.createFile(logFile);
 		   MUS_xls = new Xls_Reader(System.getProperty("user.dir") + dataConstants.MUS_excel);
 			//cardHelper = new HH_CardsHelper(calorieIntakeDataSheet);
 		   fuzzingfull = new ArrayList<String>();
-		  // fuzzingfull.add("!");
-		  // fuzzingfull.add("!!");
-		   //fuzzingfull.add("-");
-		   
 		   HTTPVerb = new ArrayList<String>();
-		  
+		   XSS = new ArrayList<String>();
+		   SQLInjection = new ArrayList<String>();
 		   
-		   HTTPVerb.add("GET");
-		   HTTPVerb.add("POST");
-		   HTTPVerb.add("PUT");
-		   HTTPVerb.add("PATCH");
-		   HTTPVerb.add("DELETE");
+		   fuzzingfull = readAttackPayload(dataConstants.FUZZFULL);
+		   HTTPVerb = readAttackPayload(dataConstants.HTTPVERB);
+		   XSS = readAttackPayload(dataConstants.XSS);
+		   SQLInjection = readAttackPayload(dataConstants.SQLINJECT);
+
+//		   
+//		   HTTPVerb.add("GET");
+//		   HTTPVerb.add("POST");
+//		   HTTPVerb.add("PUT");
+//		   HTTPVerb.add("PATCH");
+//		   HTTPVerb.add("DELETE");
 		   
 		   //request = new ArrayList<HttpRequestBase>();
 		  // fuzzingfull.add("!=!");
@@ -105,6 +111,25 @@ public class RequestClass {
 			//System.out.println("\nHeader : " + headersMap );
 		return headersMap;
 	}
+		
+		public ArrayList<String> readAttackPayload(String filepath) throws IOException {
+        	
+			ArrayList<String> payload = new ArrayList<String>();
+	        try {
+
+	            File f = new File(filepath);
+	            List<String> lines = FileUtils.readLines(f, "UTF-8");
+
+	            for (String line : lines) {
+	                System.out.println(line);
+	                payload.add(line);
+	            }
+
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        return payload;
+	    }
 	   
 		//@Test(dataProvider = "getprofileDetails" ,priority = 1)
 		   public ArrayList<HttpRequestBase> configureRequest(Hashtable<String, String> data)throws Exception {  
@@ -128,7 +153,7 @@ public class RequestClass {
 					
 					for(int attacktypecount = 0 ; attacktypecount < attacktype.length ; attacktypecount++)
 					{	
-						System.out.println("Attack Type :" + attacktype[attacktypecount]);
+						System.out.println("\nAttack Type :" + attacktype[attacktypecount]);
 						ArrayList<String> attacktypepayload = new ArrayList<String>();
 						
 						//Read the attack payload from a file (Fuzzing full, SQL, XSS)
@@ -191,10 +216,10 @@ public class RequestClass {
 								}
 								break;
 								case "methodType":
-									if(attacktype[attacktypecount].equals("HTTPVERB"))
-									{
+									//if(attacktype[attacktypecount].equals("HTTPVERB"))
+									//{
 									methodType = attacktypepayload.get(attacktypepayloadcount) ;
-									}
+									//}
 									break;
 							default:
 								break;

@@ -7,7 +7,7 @@
     <classes>
       <class name="com.philips.request.RequestClass">
         <methods>
-          <include name="test" invocation-numbers="0"/>
+          <include name="getProfile" invocation-numbers="0"/>
           <include name="configure"/>
         </methods>
       </class> <!-- com.philips.request.RequestClass -->

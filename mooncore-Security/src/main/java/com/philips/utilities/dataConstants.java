@@ -31,6 +31,12 @@ public  class dataConstants {
 	
 	
 	public static final String MUS_excel = "/Datas/MUS.xlsx";
+	public static final String FUZZFULL = "./AttackPayload/FuzzingFull.txt";
+	public static final String SQLINJECT = "./AttackPayload/HTTPVerb.txt";
+	public static final String XSS = "./AttackPayload/SQLInjection.txt";
+	public static final String HTTPVERB = "./AttackPayload/XSS.txt";
+
+
 	
 	public static final String Plan = System.getProperty("user.dir")+"/src/main/resources/com/philips/SubModuleDataSheets/plan.properties";
 	public static final String RabbitMQ = System.getProperty("user.dir")+"/src/main/resources/com/philips/SubModuleDataSheets/rabbitmq.properties";
