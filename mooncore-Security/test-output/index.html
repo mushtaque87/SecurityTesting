@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -38,7 +38,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" class="navigator-link" panel-name="suite-Login_Security_Suite">
-              <span class="suite-name border-passed">Login Security Suite</span>
+              <span class="suite-name border-failed">Login Security Suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -91,7 +91,25 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods,   2 passed</span>
+                    <span class="method-stats">2 methods, 1 failed,   1 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Login_Security_Suite" class="hide-methods failed suite-Login_Security_Suite"> (hide)</a> <!-- hide-methods failed suite-Login_Security_Suite -->
+                      <a href="#" panel-name="suite-Login_Security_Suite" class="show-methods failed suite-Login_Security_Suite"> (show)</a> <!-- show-methods failed suite-Login_Security_Suite -->
+                    </span>
+                    <div class="method-list-content failed suite-Login_Security_Suite">
+                      <span>
+                        <img width="3%" src="failed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Login_Security_Suite" title="com.philips.request.RequestClass" hash-for-method="getProfile({AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
+&quot;content-type&quot;:&quot;application/json&quot;
+}, Attack...)">getProfile({AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
+"content-type":"application/json"
+}, Attack...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Login_Security_Suite -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -100,15 +118,6 @@
                       <a href="#" panel-name="suite-Login_Security_Suite" class="show-methods passed suite-Login_Security_Suite"> (show)</a> <!-- show-methods passed suite-Login_Security_Suite -->
                     </span>
                     <div class="method-list-content passed suite-Login_Security_Suite">
-                      <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Login_Security_Suite" title="com.philips.request.RequestClass" hash-for-method="getProfile({AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
-&quot;content-type&quot;:&quot;application/json&quot;
-}, Attack...)">getProfile({AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
-"content-type":"application/json"
-}, Attack...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
                       <span>
                         <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Login_Security_Suite" title="com.philips.request.RequestClass" hash-for-method="login({password=Philips@1, AttackType=FUZZFULL,SQL,XSS,HTTPVERB, methodType=POST, Payload={
@@ -128,9 +137,9 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Login_Security_Suite" class="panel Login_Security_Suite">
-          <div class="suite-Login_Security_Suite-class-passed">
+          <div class="suite-Login_Security_Suite-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
+              <img src="failed.png"/>
               <span class="class-name">com.philips.request.RequestClass</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
@@ -145,9 +154,33 @@
                   <span class="method-name">getProfile</span>
                   <span class="parameters">({AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
 "content-type":"application/json"
-}, AttackParameter=auth,methodType, Url=https://ghgw-%s.cloud.pcftest.com/api/users/%s})</span>
+}, AttackParameter=auth,methodType, Url=https://ghgw-%s.cloud.pcftest.com/api/users/$userid$/hello=$hivalue$/bye=$byevalue$})</span>
+                  <div class="stack-trace">java.lang.IllegalArgumentException: Illegal character in path at index 47: https://ghgw-mars.cloud.pcftest.com/api/users/&apos; or 1 in (@@version)--/hello=hivalue/bye=byevalue
+	at java.net.URI.create(URI.java:852)
+	at org.apache.http.client.methods.HttpPost.&lt;init&gt;(HttpPost.java:76)
+	at com.philips.restservices.RestService.generateRequest(RestService.java:208)
+	at com.philips.request.RequestClass.configureURLRequest(RequestClass.java:190)
+	at com.philips.request.RequestClass.getProfile(RequestClass.java:450)
+Caused by: java.net.URISyntaxException: Illegal character in path at index 47: https://ghgw-mars.cloud.pcftest.com/api/users/&apos; or 1 in (@@version)--/hello=hivalue/bye=byevalue
+	at java.net.URI$Parser.fail(URI.java:2848)
+	at java.net.URI$Parser.checkChars(URI.java:3021)
+	at java.net.URI$Parser.parseHierarchical(URI.java:3105)
+	at java.net.URI$Parser.parse(URI.java:3053)
+	at java.net.URI.&lt;init&gt;(URI.java:588)
+	at java.net.URI.create(URI.java:850)
+	... 29 more
+... Removed 25 stack frames
+</div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Login_Security_Suite-class-failed -->
+          <div class="suite-Login_Security_Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.philips.request.RequestClass</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
                   <a name="login({password=Philips@1, AttackType=FUZZFULL,SQL,XSS,HTTPVERB, methodType=POST, Payload={
@@ -183,7 +216,7 @@
         &lt;methods&gt;
           &lt;include name=&quot;login&quot;/&gt;
           &lt;include name=&quot;getProfile&quot;/&gt;
-          &lt;exclude name=&quot;test&quot;/&gt;
+          &lt;exclude name=&quot;changePassword&quot;/&gt;
           &lt;exclude name=&quot;logout&quot;/&gt;
         &lt;/methods&gt;
       &lt;/class&gt; &lt;!-- com.philips.request.RequestClass --&gt;
@@ -228,18 +261,18 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(2);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'login')
+data.setCell(0, 1, 'getProfile')
 data.setCell(0, 2, 'com.philips.request.RequestClass')
-data.setCell(0, 3, 5082);
+data.setCell(0, 3, 57567);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'getProfile')
+data.setCell(1, 1, 'login')
 data.setCell(1, 2, 'com.philips.request.RequestClass')
-data.setCell(1, 3, 2);
+data.setCell(1, 3, 5554);
 window.suiteTableData['Login_Security_Suite']= { tableData: data, tableDiv: 'times-div-Login_Security_Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 5 seconds</span>
+              <span class="suite-total-time">Total running time: 1 minutes</span>
               <div id="times-div-Login_Security_Suite">
               </div> <!-- times-div-Login_Security_Suite -->
             </div> <!-- times-div -->
@@ -254,13 +287,15 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Login_Security_Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">1 ignored method</span>
+            <span class="header-content">2 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
               <span class="ignored-class-name">com.philips.request.RequestClass</span>
               <div class="ignored-methods-div">
                 <span class="ignored-method-name">logout</span>
+                <br/>
+                <span class="ignored-method-name">changePassword</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -280,13 +315,15 @@ return data;
               <div class="test-method">
                 <span class="method-name">login({password=Philips@1, AttackType=FUZZFULL,SQL,XSS,HTTPVERB, methodType=POST, Payload={
     "currentPa...)</span>
-                <span class="method-start">647 ms</span>
+                <span class="method-start">955 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
+                <img src="failed.png">
+                </img>
                 <span class="method-name">getProfile({AttackType=FUZZFULL,HTTPVERB, methodType=GET, Headers={
 "content-type":"application/json"
 }, Attack...)</span>
-                <span class="method-start">5734 ms</span>
+                <span class="method-start">6519 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

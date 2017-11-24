@@ -35,7 +35,7 @@ public  class dataConstants {
 	public static final String SQLINJECT = "./AttackPayload/HTTPVerb.txt";
 	public static final String XSS = "./AttackPayload/SQLInjection.txt";
 	public static final String HTTPVERB = "./AttackPayload/XSS.txt";
-
+	public static final String CUSTOM = "./AttackPayload/XSS.txt";
 
 	
 	public static final String Plan = System.getProperty("user.dir")+"/src/main/resources/com/philips/SubModuleDataSheets/plan.properties";

@@ -7,8 +7,7 @@
 			<class name="com.philips.request.RequestClass" />
 			<methods>
 			<include name="login" />
-			<exclude name="test" />
-			
+			<exclude name="changePassword" />
         	<include name="getProfile" />
         	<exclude name="logout" />
       </methods>

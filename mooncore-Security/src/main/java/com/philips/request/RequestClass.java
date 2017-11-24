@@ -3,6 +3,7 @@ package com.philips.request;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -67,15 +69,6 @@ public class RequestClass {
 		   XSS = readAttackPayload(dataConstants.XSS);
 		   SQLInjection = readAttackPayload(dataConstants.SQLINJECT);
 
-//		   
-//		   HTTPVerb.add("GET");
-//		   HTTPVerb.add("POST");
-//		   HTTPVerb.add("PUT");
-//		   HTTPVerb.add("PATCH");
-//		   HTTPVerb.add("DELETE");
-		   
-		   //request = new ArrayList<HttpRequestBase>();
-		  // fuzzingfull.add("!=!");
 		}
 	   
 	   @DataProvider
@@ -130,6 +123,80 @@ public class RequestClass {
 	        }
 	        return payload;
 	    }
+		
+		
+		public HashMap<String, String> configureHeader(String headerString) throws ParseException{
+			
+			//System.out.println("\nHeader : " + headersMap );
+			 JSONObject  json = null;
+				
+				JSONParser parser = new JSONParser(); 
+				json = (JSONObject) parser.parse(headerString);
+				
+				
+		return json;
+	}
+		
+		public ArrayList  generateURL(String url) {
+			// TODO Auto-generated method stub
+
+			//String url = "https://ghgw-%s.cloud.pcftest.com/api/users/$userid$/hello=$hivalue$/bye=$byevalue$";
+
+			ArrayList<String> urlList = new ArrayList<String>();
+
+
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			char character = '$';
+			for(int i = 0; i < url.length(); i++){
+			    if(url.charAt(i) == character){
+			       list.add(i);
+			    }
+			}
+			
+			System.out.println(list);
+			System.out.println(url);
+
+			
+			for (int i = 0; i < list.size()+1/2; i += 2)
+			{
+				String toreplace = "%s";
+				int startposition = list.get(i) ;
+				int endposition = list.get(i+1)  ;
+				
+				String newURl = url.substring(0,startposition)+toreplace+url.substring(endposition+1,url.length());
+				newURl = newURl.replace("$", "");
+				System.out.println("\n"+ newURl);
+				urlList.add(newURl);
+				
+			}
+			
+			return urlList;	
+		}
+		
+		 public ArrayList<HttpRequestBase> configureURLRequest(Hashtable<String, String> data) throws ParseException, IOException {  
+			   ArrayList<HttpRequestBase> request = new ArrayList<HttpRequestBase>(); 
+
+			 //Header Data
+				HashMap<String, String> headers = new HashMap<String,String>();
+				headers = configureHeader(data.get("Headers"));
+			   
+			   System.out.println(headers);
+			   
+			   ArrayList<String> urls = generateURL(data.get("Url"));
+			   
+				for(int urlcount = 0 ; urlcount < urls.size(); urlcount++)
+				{
+				String finalurl = String.format(urls.get(urlcount),"mars", "' or 1 in (@@version)--")	;
+				request.add(restService.generateRequest(finalurl, headers  , null, "POST"));
+				}
+			   return request;
+		 }
+		 
+		 
+		   public HttpRequestBase generateRequest(Hashtable<String, String> data)throws Exception {  
+			   {
+				   HttpRequestBase request = restService.generateRequest(data.get("URL"), headers, payload, methodType)
+			   }
 	   
 		//@Test(dataProvider = "getprofileDetails" ,priority = 1)
 		   public ArrayList<HttpRequestBase> configureRequest(Hashtable<String, String> data)throws Exception {  
@@ -145,11 +212,15 @@ public class RequestClass {
 					JSONParser parser = new JSONParser(); 
 					json = (JSONObject) parser.parse(data.get("Payload"));
 					}
+					
+					
 					//String[] attackparameters = data.get("BodyParameters").split(",");
 
 					//Attack details
 					String[] attacktype = data.get("AttackType").split(",");
 					String[] attackparts = data.get("AttackParameter").split(",");
+					
+					
 					
 					for(int attacktypecount = 0 ; attacktypecount < attacktype.length ; attacktypecount++)
 					{	
@@ -164,12 +235,14 @@ public class RequestClass {
 						case "HTTPVERB":
 							attacktypepayload = HTTPVerb;
 							break;
+						case "CUSTOM":
+							attacktypepayload = HTTPVerb;
+							break;
 						default:
 							break;
 						}
 						
-						//if()
-						
+					
 						//MethodType
 						String methodType = data.get("methodType");
 						
@@ -180,8 +253,21 @@ public class RequestClass {
 							headers = generateHeader(true);
 							
 							//Url endpoint
-							String url = String.format(data.get("Url"), "mars",user.getUserId());
+							String url = String.format(data.get("Url"), "mars");
 							System.out.println("change password url " + url);
+							
+							//url = url.replace("userid", user.getUserId());
+							url = url.replace("userid", "987272");
+
+							
+							ArrayList<Integer> list = new ArrayList<Integer>();
+							char character = '$';
+							for(int i = 0; i < url.length(); i++){
+							    if(url.charAt(i) == character){
+							       list.add(i);
+							    }
+							}
+							
 							
 							//Payload
 							String payload = "";
@@ -192,8 +278,6 @@ public class RequestClass {
 							
 							System.out.println("attackparameter :" + attackparts[attackparamcount]);
 
-							
-							
 							
 							for (int attacktypepayloadcount = 0 ; attacktypepayloadcount < attacktypepayload.size(); attacktypepayloadcount++)
 							{
@@ -364,12 +448,22 @@ public class RequestClass {
 				ResponseObject response = restService.sendRequest(url , generateHeader(true) , null , data.get("methodType") );
 				System.out.println(response.statusCode);
 				*/
+				
+				
+				configureURLRequest(data);
+				
+				
+				
 				ArrayList<HttpRequestBase> request  = configureRequest(data);
 				System.out.println("\nStart Hitting");
 				System.out.println("Request : "+ request);
 				System.out.println("Request Count : "+ request.size());
 				for(int requestcount = 0; requestcount < request.size() ; requestcount++)
 				{
+					
+					System.out.println("Request:" + request.get(requestcount));
+
+					
 					ResponseObject respone = restService.doRequest(request.get(requestcount));
 					System.out.println("Response:" + respone.statusCode);
 				}
@@ -398,7 +492,8 @@ public class RequestClass {
 	  @Test(dataProvider = "getlogoutDetails" ,priority = 3)
 	   public void logout(Hashtable<String, String> data)throws Exception {  
 			try {
-				requestCount ++;
+			
+				/*requestCount ++;
 				System.out.println("\n******** logout *******\n");
 				
 				if(data.get("methodType").equals("POST") || data.get("methodType").equals("PUT") || data.get("methodType").equals("PATCH"))
@@ -414,6 +509,85 @@ public class RequestClass {
 				ResponseObject response = restService.sendRequest(url , generateHeader(true) , null , data.get("methodType") );
 
 				System.out.println(response.statusCode);
+				*/
+				
+				ArrayList<HttpRequestBase> request  = configureRequest(data);
+				System.out.println("\nStart Hitting");
+				System.out.println("Request : "+ request);
+				System.out.println("Request Count : "+ request.size());
+				for(int requestcount = 0; requestcount < request.size() ; requestcount++)
+				{
+					System.out.println("Request:" + request.get(requestcount));
+
+					
+					ResponseObject respone = restService.doRequest(request.get(requestcount));
+					System.out.println("Response:" + respone.statusCode);
+				}
+				
+				
+				//Assert.assertEquals(Loginresponse.statusCode, 200);
+				//summaryLogger.log("IntroAEE_Cards_13_14", count++, "Login to user account", "PASS");
+
+				//user = GenericObjectMapper.readJSONToJavaObject(Loginresponse.responseBody, MdsLoginResponse.class);
+				//System.out.println("Response Code :" + user.getUserId());
+				
+				
+//				if(Loginresponse.statusCode==200)
+//				{
+//					pss_getDetails();
+//				}
+				
+			} catch (Error | IOException e) {
+				e.getStackTrace();
+			
+			}
+			  
+		} 
+	  
+	  
+	  @Test(dataProvider = "getchangePassword" ,priority = 3)
+	   public void changePassword(Hashtable<String, String> data)throws Exception {  
+			try {
+			
+				/*requestCount ++;
+				System.out.println("\n******** logout *******\n");
+				
+				if(data.get("methodType").equals("POST") || data.get("methodType").equals("PUT") || data.get("methodType").equals("PATCH"))
+				{
+				String payload = JsonPayloadCreator.createLoginJsonPayload(data.get("username"), data.get("password"));
+				System.out.println("body" + payload);
+				}
+				
+				//Loginresponse = restService.sendPostRequest(String.format(data.get("Url"),"mars"), generateHeader() , payload);
+				String url = String.format(data.get("Url"), "mars",user.getUserId());
+				System.out.println("logout url " + url);
+
+				ResponseObject response = restService.sendRequest(url , generateHeader(true) , null , data.get("methodType") );
+
+				System.out.println(response.statusCode);
+				*/
+				
+				
+				
+				
+				
+				
+				
+				
+				ArrayList<HttpRequestBase> request  = configureRequest(data);
+				System.out.println("\nStart Hitting");
+				System.out.println("Request : "+ request);
+				System.out.println("Request Count : "+ request.size());
+				for(int requestcount = 0; requestcount < request.size() ; requestcount++)
+				{
+					System.out.println("Request:" + request.get(requestcount));
+
+					
+					ResponseObject respone = restService.doRequest(request.get(requestcount));
+					System.out.println("Response:" + respone.statusCode);
+				}
+				
+				
 				//Assert.assertEquals(Loginresponse.statusCode, 200);
 				//summaryLogger.log("IntroAEE_Cards_13_14", count++, "Login to user account", "PASS");
 
